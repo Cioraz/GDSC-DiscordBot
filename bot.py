@@ -1,17 +1,22 @@
 import discord
 import responses
+from dotenv import load_dotenv
+import os
+import utils
+load_dotenv()
 
 
-async def send_message(message, user_message, is_private):
+async def send_message(message, user_message, db_GDSC):
     try:
-        response = responses.handle_response(user_message)
-        await message.author.send(response) if is_private else await message.channel.send(response)
+        response = responses.handle_response(user_message, db_GDSC)
+        await message.author.send(response)
+        await message.channel.send(response)
     except Exception as e:
         print(e)
 
 
-def run_bot():
-    TOKEN = "MTE2MTY1NzAzMDk2NTIwMzA1NA.GdUq_B.mpr9BTnd3982W1TU9s4Qqgj0qk0ZlnNX5EkUYM"
+def run_bot(db_GDSC):
+    BOT_TOKEN = os.environ.get('BOT_TOKEN')
     intents = discord.Intents.default()
     intents.message_content = True
     client = discord.Client(intents=intents)
@@ -24,14 +29,31 @@ def run_bot():
     async def on_message(message):
         if message.author == client.user:
             return  # prevents bot from responding to itself
-        username = str(message.author)
+        discord_username = str(message.author)
         user_message = str(message.content)
-        channel = str(message.channel)
 
-        if user_message[0] == "?":
-            user_message = user_message[1:]
-            await send_message(message, user_message, is_private=True)
+        # ?add_sig sigName HeadName
+        words = user_message.split(' ')
+        if len(words) > 2:
+            if words[0] == "?add_sig":
+                if (utils.isHead(db_GDSC, discord_username)):
+                    sig_name = words[1]
+                    sig_head = words[2]
+                    utils.addSIG(db_GDSC, sig_name, sig_head)
+                    await message.channel.send("SIG added successfully!")
+                else:
+                    await message.channel.send("You do not have the permissions!")
+            if words[0] == "?add_user":
+                if (utils.isHead(db_GDSC, discord_username)):
+                    discord_username = words[1]
+                    name = words[2]
+                    email = words[3]
+                    utils.addUser(db_GDSC, discord_username, name, email)
+                    await message.channel.send("User added successfully!")
+                else:
+                    await message.channel.send("You do not have the permissions!")
         else:
-            await send_message(message, user_message, is_private=False)
+            user_message = words[0]
+            await send_message(message, user_message, db_GDSC)
 
-    client.run(TOKEN)
+    client.run(BOT_TOKEN)

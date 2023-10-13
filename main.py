@@ -5,13 +5,14 @@ import os
 
 load_dotenv()
 MONGODB_URI = os.environ['MONGODB_URI']
-MONGO_ID = os.environ['MONGO_ID']
 
 if __name__ == "__main__":
     try:
-        client = MongoClient('hostname', 27017)
+        db_connection = MongoClient(MONGODB_URI)
         print("Connected to DB")
-        bot.run_bot()
+        db = db_connection["GDSC_Bot"]
+        bot.run_bot(db)
 
-    except Exception:
+    except Exception as e:
+        print(e)
         print("Could not connect to MongoDB")
