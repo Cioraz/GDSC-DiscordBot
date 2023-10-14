@@ -46,7 +46,8 @@ def isDiscordUsernameOnDatabase(db_GDSC, discord_username):
 def isExecutive(db_GDSC, discord_username):
     user_collection = db_GDSC['users']
     x = user_collection.find_one({'discord_username': discord_username})
-    if x['role'] == "Executive Member":
+    # EM-Executive Member
+    if x['role'] == "EM":
         return 1  # If executive Member
     else:
         return 0  # Not an executive Member

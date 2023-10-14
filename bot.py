@@ -54,7 +54,7 @@ def run_bot(db_GDSC):
                             utils.addSIG(db_GDSC, sig_name, sig_head)
                             await message.channel.send("SIG added successfully!")
 
-                        # Format - ?add_user role username email github sig year branch phone discord_username head
+                        # Format - ?add_user role(M/EM) username email github sig year branch phone discord_username head
                         elif words[0] == "?add_user":
                             role = words[1]
                             username = words[2]
