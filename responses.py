@@ -1,26 +1,35 @@
 import query
 import utils
 
+# Handling non admin responses available to NEP and intruders in the group
+
 
 def handle_response(message, db_GDSC):
-    p_message = message.lower()
-    string = p_message.split(' ')
+    # Splitting the message
+    string = message.split(' ')
+
     if (len(string) == 1):
-        if (string[0] == 'hello'):
-            return "Welcome Msg"
-        elif (string[0] == 'add_sig'):
-            return utils.addSIG()
-        else:
-            return "INVALID"
+        string = string[0]
+        if (string.lower() == 'hello'):
+            return "Randomm Welcome"
     elif (len(string) == 2):
-        if (string[0] == 'sig_info'):
-            sig_name = string[1]
+        # To ensure first word is in all word cases
+        x = string[0]
+        x = x.lower()
+        if (x == 'sig_info'):
+            # Making the sig name to suit all cases
+            sig_name = string[1].lower()
             if (utils.isValidSigName(db_GDSC, sig_name)):
                 return utils.findSigInfo(db_GDSC, sig_name)
             else:
                 return "INVALID SIG NAME"
-        else:
-            return "INVALID"
+        if (x.lower() == 'member_info'):
+            # No lower case as discord_username can include caps
+            discord_username = string[1]
+            if (utils.isValidDiscordUsername(db_GDSC, discord_username)):
+                return utils.findUserInfo(db_GDSC, discord_username)
+            else:
+                return "INVALID DISCORD USERNAME!"
 
 #     # help
 # p_message == 'help':
