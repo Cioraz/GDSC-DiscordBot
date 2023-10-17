@@ -18,6 +18,7 @@ const leftSide = () => {
                     <h2 className="sm:text-1xl md:text-2xl lg:text-4xl text-[#b3d3f6] my-4">
                         We Are
                     </h2>
+
                     <h1 className="block text-[#1490e4] font-extrabold p-2  sm:text-3xl md:text-4xl lg:text-6xl text-center">
                         Web
                         <br />

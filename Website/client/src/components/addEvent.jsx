@@ -1,9 +1,11 @@
 import React from 'react'
 import Leftside from '../pages/leftSide'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const addEvent = () => {
+    const navigate = useNavigate();
     const initialValues = {
         event_name: '',
         event_description: '',
@@ -36,7 +38,10 @@ const addEvent = () => {
             event_t_or_nt: formValues.event_t_or_nt,
 
         })
-            .then(res => console.log(res))
+            .then(res => {
+                console.log(res);
+                navigate('/success');
+            })
             .catch(err => console.log(err))
 
         //localStorage.setItem("event", JSON.stringify(result))
@@ -71,7 +76,7 @@ const addEvent = () => {
             <div className="bg-[#1490e4] h-screen flex flex-col justify-center">
                 <form onSubmit={handleSubmit}
 
-                    className="max-w-[400px] w-full mx-auto backdrop-blur-xl bg-white p-4 text-black rounded shadow-2xl"
+                    className="max-w-[400px] w-full mx-auto backdrop-blur-xl bg-[#1a212a] p-4 text-white rounded shadow-2xl"
                 >
                     <h2 className="text-4xl font-bold text-center uppercase py-6">
                         New Event
@@ -80,7 +85,7 @@ const addEvent = () => {
                         <label htmlFor="event_name">Event Name</label>
                         <input
                             type="text"
-                            className="border p-2 bg-gray-200"
+                            className="border p-2 bg-gray-400"
                             name="event_name" value={formValues.event_name} onChange={handleChange}
                         />
                     </div>
@@ -88,7 +93,7 @@ const addEvent = () => {
                     <div className="flex flex-col py-2">
                         <label htmlFor="">Event Description</label>
                         <textarea
-                            className="border p-2 bg-gray-200"
+                            className="border p-2 bg-gray-400"
                             name="event_description"
                             defaultValue={""} value={formValues.event_description}
                             onChange={handleChange}
@@ -99,7 +104,7 @@ const addEvent = () => {
                         <label htmlFor="">Venue</label>
                         <input
                             type="text"
-                            className="border p-2 text-black bg-gray-200"
+                            className="border p-2 text-black bg-gray-400"
                             name="event_venue" value={formValues.event_venue}
                             onChange={handleChange}
                         />
@@ -110,7 +115,7 @@ const addEvent = () => {
                         <input
                             type="date"
                             id="start"
-                            className="text-black bg-gray-200"
+                            className="text-black bg-gray-400"
                             name="event_date"
                             value={formValues.event_date}
                             onChange={handleChange}
@@ -122,7 +127,7 @@ const addEvent = () => {
                         <input
                             type="time"
                             id="time"
-                            className="text-black bg-gray-200"
+                            className="text-black bg-gray-400"
                             name="event_time"
                             value={formValues.event_time}
                             onChange={handleChange}
