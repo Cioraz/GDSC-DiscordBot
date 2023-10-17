@@ -4,6 +4,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
+// fix navigation
 const addEvent = () => {
     const navigate = useNavigate();
     const initialValues = {
@@ -12,7 +13,7 @@ const addEvent = () => {
         event_venue: '',
         event_date: '',
         event_time: '',
-        event_t_or_nt: false
+        event_T: false
     }
     const [formValues, setFormValues] = useState(initialValues)
     const [formError, setFormErrors] = useState({})
@@ -35,16 +36,15 @@ const addEvent = () => {
             event_venue: formValues.event_venue,
             event_date: formValues.event_date,
             event_time: formValues.event_time,
-            event_t_or_nt: formValues.event_t_or_nt,
+            event_T: formValues.event_T,
 
         })
             .then(res => {
-                console.log(res);
+                console.log(res)
                 navigate('/success');
             })
             .catch(err => console.log(err))
 
-        //localStorage.setItem("event", JSON.stringify(result))
     }
 
     const validate = (values) => {
@@ -85,7 +85,7 @@ const addEvent = () => {
                         <label htmlFor="event_name">Event Name</label>
                         <input
                             type="text"
-                            className="border p-2 bg-gray-400"
+                            className="border p-2 bg-gray-400 text-black"
                             name="event_name" value={formValues.event_name} onChange={handleChange}
                         />
                     </div>
@@ -93,7 +93,7 @@ const addEvent = () => {
                     <div className="flex flex-col py-2">
                         <label htmlFor="">Event Description</label>
                         <textarea
-                            className="border p-2 bg-gray-400"
+                            className="border p-2 bg-gray-400 text-black"
                             name="event_description"
                             defaultValue={""} value={formValues.event_description}
                             onChange={handleChange}
@@ -139,9 +139,13 @@ const addEvent = () => {
                         <input
                             className="flex"
                             type="checkbox"
-                            name="event_t_or_nt"
-                            value={formValues.event_t_or_nt}
-                            onChange={handleChange}
+                            name="event_T"
+                            onChange={
+                                () => {
+                                    formValues.event_T = !formValues.event_T;
+                                    handleChange
+                                }
+                            }
                         />
                     </div>
                     <button className="border w-full my-5 p-4 bg-black text-white hover:bg-gray-800 rounded">

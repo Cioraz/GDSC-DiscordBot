@@ -6,7 +6,7 @@ const eventSchema = new mongoose.Schema({
     event_date: Date,
     event_venue: String,
     event_time: String,
-    event_t_or_nt: Boolean
+    event_T: Boolean
 
 })
 

@@ -37,9 +37,6 @@ const addSig = () => {
                 navigate('/success');
             })
             .catch(err => console.log(err))
-
-
-        //localStorage.setItem("event", JSON.stringify(result))
     }
 
     const validate = (values) => {
@@ -74,7 +71,7 @@ const addSig = () => {
                         <label htmlFor="sig_name">SIG Name</label>
                         <input
                             type="text"
-                            className="border p-2 bg-gray-200"
+                            className="border p-2 bg-gray-200 text-black"
                             name="sig_name" value={formValues.sig_name} onChange={handleChange}
                         />
                     </div>
@@ -82,7 +79,7 @@ const addSig = () => {
                     <div className="flex flex-col py-2">
                         <label htmlFor="sig_desc">SIG Description</label>
                         <textarea
-                            className="border p-2 bg-gray-200"
+                            className="border p-2 bg-gray-200 text-black"
                             value={formValues.sig_desc} name="sig_desc"
                             onChange={handleChange}
                         />

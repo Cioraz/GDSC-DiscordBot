@@ -48,7 +48,6 @@ const addUser = () => {
         })
             .then(res => {
                 console.log(res);
-                sendMail(formValues.email);
                 navigate('/success');
             })
             .catch(err => console.log(err))
