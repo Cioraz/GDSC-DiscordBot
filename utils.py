@@ -72,6 +72,7 @@ def findSigInfo(db_GDSC, sig_name):
         "sig": sig_name,
     }
     x = sig_collection.find_one(data)
+    print(x)
     return f'''
         SIG Name: {sig_name}\nSIG Head: {x["head"]}\nMembers: {x["members"]}
     '''
@@ -104,21 +105,22 @@ def addEvent(db_GDSC, date, event_Name, venue, time, about, tech_or_tech):
     event_collection.insert_one(data)
 
 
-def addUser(db_GDSC, role, username, email, github, sig, year, branch, phone, discord_username, head):
+async def addUser(db_GDSC, role, username, email, github, sig, year, branch, phone, discord_username, head, app):
     user_collection = db_GDSC["users"]
-    data = {
-        "role": role,
-        "username": username,
-        "email": email,
-        "github": github,
-        "sig": sig,
-        "year": year,
-        "branch": branch,
-        "phone": phone,
-        "discord_username": discord_username,
-        "head": head
-    }
-    user_collection.insert_one(data)
+    app.run(debug=True)
+    # data = {
+    #     "role": role,
+    #     "username": username,
+    #     "email": email,
+    #     "github": github,
+    #     "sig": sig,
+    #     "year": year,
+    #     "branch": branch,
+    #     "phone": phone,
+    #     "discord_username": discord_username,
+    #     "head": head
+    # }
+    # user_collection.insert_one(data)
 
 
 def addUserToSig(db_GDSC, sig, discord_username):
@@ -130,3 +132,55 @@ def addUserToSig(db_GDSC, sig, discord_username):
         sig_collection.update_one(
             {"sig": sig}, {"$push": {"members": discord_username}})
         return 1
+
+
+def upcomingEvents(db_GDSC):
+    events_collection = db_GDSC["events"]
+    # sort by the date of events
+
+    x = events_collection.find({})
+    L = []
+
+    # sorted_events = sorted(x, key=lambda k: k['event_date'])
+    sorted_events = sorted(x, key=lambda k: k['event_date'])
+    for i in sorted_events:
+        L.append(i['event_name'])
+    return L
+
+
+def eventInfo(db_GDSC, event_name):
+    events_collection = db_GDSC["events"]
+    x = events_collection.find_one({"event_name": event_name})
+    if x == None:
+        return 0
+    else:
+        return f'''
+            Event Name: {x["event_name"]}\nDate: {x["event_date"]}\nTime: {x["event_time"]}\nVenue: {x["event_venue"]}\nAbout: {x["event_description"]}\nTechical Event: {x["event_T"]}
+        '''
+
+
+def displayNonTechnicalEvents(db_GDSC):
+    events_collection = db_GDSC["events"]
+    x = events_collection.find({"event_T": False})
+    L = []
+    for i in x:
+        L.append(i["event_name"])
+    return L
+
+
+def displayTechnicalEvents(db_GDSC):
+    events_collection = db_GDSC["events"]
+    x = events_collection.find({"event_T": True})
+    L = []
+    for i in x:
+        L.append(i["event_name"])
+    return L
+
+
+def isValidEventName(db_GDSC, event_name):
+    event_collection = db_GDSC["events"]
+    x = event_collection.find_one({"event_name": event_name})
+    if x == None:
+        return 0  # Dint find such a Event
+    else:
+        return 1  # Found the Event

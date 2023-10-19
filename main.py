@@ -3,12 +3,13 @@ from dotenv import load_dotenv
 from pymongo import MongoClient
 import os
 
-
 load_dotenv()
 MONGODB_URI = os.environ['MONGODB_URI']
 
+
 if __name__ == "__main__":
     try:
+
         db_connection = MongoClient(MONGODB_URI)
         print("Connected to DB")
         db = db_connection["GDSC_Bot"]
