@@ -24,6 +24,7 @@ const addSig = () => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault()
+        console.log("hello")
         setFormErrors(validate(formValues))
 
         axios.post("http://localhost:3000/api/addSig", {

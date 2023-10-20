@@ -1,3 +1,5 @@
+import datetime
+
 # All validator functions
 
 '''
@@ -135,12 +137,24 @@ def addUserToSig(db_GDSC, sig, discord_username):
 
 
 def upcomingEvents(db_GDSC):
-    # sort events by date
+    # for upcoming events with reference to current date where current date is todays date get from datetime module
     events_collection = db_GDSC["events"]
     x = events_collection.find().sort("event_date")
     L = []
     for i in x:
-        L.append(i["event_name"])
+        if i["event_date"] > datetime.datetime.now():
+            L.append(i["event_name"])
+    return L
+
+
+def displayPastEvents(db_GDSC):
+    # display the past events with reference to current date where current date is todays date get from datetime module
+    events_collection = db_GDSC["events"]
+    x = events_collection.find().sort("event_date")
+    L = []
+    for i in x:
+        if i["event_date"] < datetime.datetime.now():
+            L.append(i["event_name"])
     return L
 
 

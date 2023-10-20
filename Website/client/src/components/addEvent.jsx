@@ -4,7 +4,6 @@ import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
-// fix navigation
 const addEvent = () => {
     const navigate = useNavigate();
     const initialValues = {
@@ -59,11 +58,13 @@ const addEvent = () => {
             errors.event_venue = "Event Venue is required!";
         }
         // handle edge cases when date is before current date and time is before current time on current date
-        if (!values.event_date) {
-            errors.event_date = "Event Date is required!";
+
+
+        if (!values.event_date || values.event_date < new Date().toISOString().split('T')[0]) {
+            errors.event_date = "Event Date is required or incorrect!";
         }
-        if (!values.event_time) {
-            errors.event_time = "Event Time is required!";
+        if (!values.event_time || values.event_time < new Date().toISOString().split('T')[1]) {
+            errors.event_time = "Event Time is required or incorrect!";
         }
         return errors
     }
@@ -139,7 +140,6 @@ const addEvent = () => {
                         <input
                             className="flex"
                             type="checkbox"
-                            name="event_T"
                             onChange={
                                 () => {
                                     formValues.event_T = !formValues.event_T;

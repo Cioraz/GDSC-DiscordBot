@@ -38,6 +38,16 @@ def handle_response(message, db_GDSC):
                 k += 1
             return msg
 
+        # code for past events
+        if (string.lower() == 'past_events'):
+            k = 0
+            msg = ''
+            for i in utils.displayPastEvents(db_GDSC):
+                msg = msg + f'{k+1}. {i}'
+                msg = msg+'\n'
+                k += 1
+            return msg
+
         if (string.lower() == 'technical_events'):
             k = 0
             msg = ''
