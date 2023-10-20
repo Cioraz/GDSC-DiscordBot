@@ -135,16 +135,12 @@ def addUserToSig(db_GDSC, sig, discord_username):
 
 
 def upcomingEvents(db_GDSC):
+    # sort events by date
     events_collection = db_GDSC["events"]
-    # sort by the date of events
-
-    x = events_collection.find({})
+    x = events_collection.find().sort("event_date")
     L = []
-
-    # sorted_events = sorted(x, key=lambda k: k['event_date'])
-    sorted_events = sorted(x, key=lambda k: k['event_date'])
-    for i in sorted_events:
-        L.append(i['event_name'])
+    for i in x:
+        L.append(i["event_name"])
     return L
 
 

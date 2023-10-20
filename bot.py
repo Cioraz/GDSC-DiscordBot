@@ -108,7 +108,7 @@ def run_bot(db_GDSC):
                 if (utils.isExecutive(db_GDSC, client_username)):
                     if (utils.isHead(db_GDSC, client_username)):
                         if words[0] == "?add_sig":
-                            ADD_SIG_URL = os.environ.get(ADD_SIG_URL)
+                            ADD_SIG_URL = os.environ.get('ADD_SIG_URL')
                             await message.author.send(ADD_SIG_URL)
 
                         elif words[0] == "?add_user":
@@ -116,7 +116,7 @@ def run_bot(db_GDSC):
                             await message.author.send(ADD_USER_URL)
                             await message.channel.send("Please check your DM for further instructions")
                         elif (user_message == "?adminHelp"):
-                            await message.channel.send("```?add_sig sigName HeadName\n?add_user role username email github sig year branch phone discord_username\n?add_event Date Event_Name Venue Time About {Tehnical/Non-Technical(True/False)}```")
+                            await message.channel.send("```?add_sig (To add a new SIG)\n?add_user (To add a new member)\n?add_event (To add a new Event)```")
                         elif (user_message == '?add_event'):
                             ADD_EVENT_URL = os.environ.get('ADD_EVENT_URL')
                             await message.author.send(ADD_EVENT_URL)
@@ -124,7 +124,7 @@ def run_bot(db_GDSC):
 
                     else:
                         if (user_message == "?adminHelp"):
-                            await message.channel.send("```?add_sig sigName HeadName\n?add_user role username email github sig year branch phone discord_username\n?add_event Date Event_Name Venue Time About {Tehnical/Non-Technical(True/False)}```")
+                            await message.channel.send("```?add_sig (To add a new SIG)\n?add_user (To add a new member)\n?add_event (To add a new Event)```")
                         if (user_message == '?add_event'):
                             ADD_EVENT_URL = os.environ.get('ADD_EVENT_URL')
                             await message.author.send(ADD_EVENT_URL)

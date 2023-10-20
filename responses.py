@@ -14,8 +14,8 @@ def handle_response(message, db_GDSC):
         if (string.lower() == 'help'):
             return "Welcome to WEC command help page\n1. upcoming_events (This gets a list of the 3 upcoming events of WEC)\n2. sig_info <sig_name> (This gives information about the SIG)\n3. member_info <discord_username> (This gives information about the member)\n4. event_info <event_name> (This gives information about the event)"
         if (string.lower() == 'upcoming_events'):
+
             L = utils.upcomingEvents(db_GDSC)
-            print(L)
 
             # only top 3 events displayed
             if (len(L) == 0):

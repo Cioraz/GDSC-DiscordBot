@@ -215,7 +215,7 @@ const addUser = () => {
                         />
                     </div>
                     <button className="border w-full my-5 p-4 bg-black text-white hover:bg-gray-800 rounded">
-                        Add Event!
+                        Add User!
                     </button>
                 </form>
             </div>
