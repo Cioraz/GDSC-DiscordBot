@@ -107,24 +107,6 @@ def addEvent(db_GDSC, date, event_Name, venue, time, about, tech_or_tech):
     event_collection.insert_one(data)
 
 
-async def addUser(db_GDSC, role, username, email, github, sig, year, branch, phone, discord_username, head, app):
-    user_collection = db_GDSC["users"]
-    app.run(debug=True)
-    # data = {
-    #     "role": role,
-    #     "username": username,
-    #     "email": email,
-    #     "github": github,
-    #     "sig": sig,
-    #     "year": year,
-    #     "branch": branch,
-    #     "phone": phone,
-    #     "discord_username": discord_username,
-    #     "head": head
-    # }
-    # user_collection.insert_one(data)
-
-
 def addUserToSig(db_GDSC, sig, discord_username):
     sig_collection = db_GDSC["sig"]
     x = sig_collection.find_one({"sig": sig})

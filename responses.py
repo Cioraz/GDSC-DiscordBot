@@ -16,6 +16,7 @@ def handle_response(message, db_GDSC):
         if (string.lower() == 'upcoming_events'):
 
             L = utils.upcomingEvents(db_GDSC)
+            print(L)
 
             # only top 3 events displayed
             if (len(L) == 0):

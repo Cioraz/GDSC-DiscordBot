@@ -1,5 +1,7 @@
+// Initialize Mongoose
 const mongoose = require('mongoose');
 
+// Create a schema for events
 const eventSchema = new mongoose.Schema({
     event_name: String,
     event_description: String,
@@ -10,4 +12,5 @@ const eventSchema = new mongoose.Schema({
 
 })
 
+// Export the model
 module.exports = mongoose.model('events', eventSchema);

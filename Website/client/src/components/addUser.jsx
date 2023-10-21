@@ -2,11 +2,9 @@ import React from 'react'
 import Leftside from '../pages/leftSide'
 import { useState } from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
-
 
 const addUser = () => {
-    const navigate = useNavigate();
+
     const initialValues = {
         role: '',
         username: '',
@@ -34,7 +32,8 @@ const addUser = () => {
         e.preventDefault()
         setFormErrors(validate(formValues))
 
-        axios.post("http://localhost:3000/api/addUser", {
+
+        await axios.post("http://localhost:3000/api/addUser", {
             username: formValues.username,
             email: formValues.email,
             github: formValues.github,
@@ -46,12 +45,6 @@ const addUser = () => {
             branch: formValues.branch,
             head: formValues.head,
         })
-            .then(res => {
-                console.log(res);
-                navigate('/success');
-            })
-            .catch(err => console.log(err))
-
     }
 
     const validate = (values) => {
@@ -76,6 +69,7 @@ const addUser = () => {
 
 
     return (
+
 
         <div className="grid grid-cols-1 sm:grid-cols-2">
             <Leftside />

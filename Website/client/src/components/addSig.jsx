@@ -2,10 +2,8 @@ import React from 'react'
 import Leftside from '../pages/leftSide'
 import { useState } from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
 
 const addSig = () => {
-    const navigate = useNavigate();
     const initialValues = {
         sig_name: '',
         head_name: '',
@@ -24,20 +22,15 @@ const addSig = () => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log("hello")
         setFormErrors(validate(formValues))
 
-        axios.post("http://localhost:3000/api/addSig", {
+        await axios.post("http://localhost:3000/api/addSig", {
             sig_name: formValues.sig_name,
             sig_head: formValues.sig_head,
             sig_desc: formValues.sig_desc
 
         })
-            .then(res => {
-                console.log(res)
-                navigate('/success');
-            })
-            .catch(err => console.log(err))
+
     }
 
     const validate = (values) => {

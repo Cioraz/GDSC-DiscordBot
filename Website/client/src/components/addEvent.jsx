@@ -2,10 +2,8 @@ import React from 'react'
 import Leftside from '../pages/leftSide'
 import { useState } from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
 
 const addEvent = () => {
-    const navigate = useNavigate();
     const initialValues = {
         event_date: '',
         event_venue: '',
@@ -29,7 +27,7 @@ const addEvent = () => {
         e.preventDefault()
         setFormErrors(validate(formValues))
 
-        axios.post("http://localhost:3000/api/addEvent", {
+        await axios.post("http://localhost:3000/api/addEvent", {
             event_date: formValues.event_date,
             event_time: formValues.event_time,
             event_description: formValues.event_description,
@@ -38,11 +36,7 @@ const addEvent = () => {
             event_name: formValues.event_name
 
         })
-            .then(res => {
-                console.log(res)
-                navigate('/success');
-            })
-            .catch(err => console.log(err))
+
 
     }
 
