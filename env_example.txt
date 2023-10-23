@@ -1,0 +1,5 @@
+BOT_TOKEN=<Your bot Token>
+MONGODB_URI="mongodb://127.0.0.1:27017"
+ADD_EVENT_URL = "http://localhost:5173/addEvent"
+ADD_USER_URL = "http://localhost:5173/addUser"
+ADD_SIG_URL = "http://localhost:5173/addSig"

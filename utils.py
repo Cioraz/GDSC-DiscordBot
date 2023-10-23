@@ -7,6 +7,8 @@ import datetime
     Handling all is validators
 '''
 
+# Check if its a valid SIG
+
 
 def isValidSigName(db_GDSC, sig_name):
     sig_collection = db_GDSC["sigs"]
@@ -16,6 +18,8 @@ def isValidSigName(db_GDSC, sig_name):
     else:
         return 1  # Found the SIG
 
+# Check if its a valid discord username on WEC database
+
 
 def isValidDiscordUsername(db_GDSC, discord_username):
     user_collection = db_GDSC["users"]
@@ -24,6 +28,8 @@ def isValidDiscordUsername(db_GDSC, discord_username):
         return 0  # Dint find such a discord_username
     else:
         return 1  # Found the discord_username
+
+# Check if person is a head
 
 
 def isHead(db_GDSC, discord_username):

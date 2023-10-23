@@ -169,7 +169,7 @@ const addUser = () => {
                             }>
                             <option value="-">-</option>
                             <option value="INTELLIGENCE">Intelligence</option>
-                            <option value="DEV">Development</option>
+                            <option value="DEVELOPMENT">Development</option>
                             <option value="ALGO">Algorithms</option>
                             <option value="SYSTEMS">Systems</option>
                         </select>
