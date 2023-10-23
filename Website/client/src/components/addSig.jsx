@@ -1,8 +1,10 @@
+// Add SIG page
 import React from 'react'
 import Leftside from '../pages/leftSide'
 import { useState } from 'react'
 import axios from 'axios'
 
+// This function contains the form to add a new SIG to the database
 const addSig = () => {
     const initialValues = {
         sig_name: '',
@@ -20,19 +22,33 @@ const addSig = () => {
         })
 
     }
+
+    // This function handles the submission of the form
     const handleSubmit = async (e) => {
-        e.preventDefault()
-        setFormErrors(validate(formValues))
+        e.preventDefault();
+        const errors = validate(formValues);
+        setFormErrors(errors);
 
-        await axios.post("http://localhost:3000/api/addSig", {
-            sig_name: formValues.sig_name,
-            sig_head: formValues.sig_head,
-            sig_desc: formValues.sig_desc
+        if (Object.keys(errors).length === 0) {
+            // No errors, so you can submit the form
+            formValues.sig_name = formValues.sig_name.toUpperCase();
 
-        })
+            try {
+                await axios.post("http://localhost:3000/api/addSig", {
+                    sig_name: formValues.sig_name,
+                    sig_head: formValues.sig_head,
+                    sig_desc: formValues.sig_desc,
+                });
 
-    }
+                // Optionally, you can reset the formValues here
+                setFormValues(initialValues);
+            } catch (error) {
+                // Handle the Axios error here, if needed
+            }
+        }
+    };
 
+    // This function validates the form
     const validate = (values) => {
         const errors = {}
         if (!values.sig_name) {

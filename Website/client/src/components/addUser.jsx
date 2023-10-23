@@ -1,8 +1,10 @@
+// This page is used to add a new user to the database
 import React from 'react'
 import Leftside from '../pages/leftSide'
 import { useState } from 'react'
 import axios from 'axios'
 
+// This function contains the form to add a new user to the database
 const addUser = () => {
 
     const initialValues = {
@@ -17,6 +19,7 @@ const addUser = () => {
         discord_username: '',
         head: false
     }
+    // This function handles the changes in the form
     const [formValues, setFormValues] = useState(initialValues)
     const [formError, setFormErrors] = useState({})
     const handleChange = (e) => {
@@ -29,23 +32,36 @@ const addUser = () => {
 
     }
     const handleSubmit = async (e) => {
-        e.preventDefault()
-        setFormErrors(validate(formValues))
+        e.preventDefault();
+        const errors = validate(formValues);
+        setFormErrors(errors);
 
+        if (Object.keys(errors).length === 0) {
+            // No errors, so you can submit the form
+            formValues.username = formValues.username.toUpperCase();
 
-        await axios.post("http://localhost:3000/api/addUser", {
-            username: formValues.username,
-            email: formValues.email,
-            github: formValues.github,
-            phone: formValues.phone,
-            discord_username: formValues.discord_username,
-            role: formValues.role,
-            sig: formValues.sig,
-            year: formValues.year,
-            branch: formValues.branch,
-            head: formValues.head,
-        })
-    }
+            try {
+                await axios.post("http://localhost:3000/api/addUser", {
+                    username: formValues.username,
+                    email: formValues.email,
+                    github: formValues.github,
+                    phone: formValues.phone,
+                    discord_username: formValues.discord_username,
+                    role: formValues.role,
+                    sig: formValues.sig,
+                    year: formValues.year,
+                    branch: formValues.branch,
+                    head: formValues.head,
+                });
+
+                // Optionally, you can reset the formValues here
+                setFormValues(initialValues);
+
+            } catch (error) {
+                // Handle the Axios error here, if needed
+            }
+        }
+    };
 
     const validate = (values) => {
         const errors = {}
@@ -69,8 +85,6 @@ const addUser = () => {
 
 
     return (
-
-
         <div className="grid grid-cols-1 sm:grid-cols-2">
             <Leftside />
             <div className="bg-[#1490e4] h-screen flex flex-col justify-center">

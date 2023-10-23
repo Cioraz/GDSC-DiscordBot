@@ -10,8 +10,6 @@ require('./database/connection');
 const events = require('./models/event')
 const users = require('./models/users')
 const sigs = require('./models/sig');
-const sendMail = require('./sendMail');
-
 
 // API Endpoints
 app.post('/api/addEvent', async (req, res) => {
@@ -22,9 +20,11 @@ app.post('/api/addEvent', async (req, res) => {
 app.post('/api/addUser', async (req, res) => {
     let user = new users(req.body);
     email = req.body.email;
-    //await sendMail(email);
-
     await user.save();
+});
+
+app.get('/success', (req, res) => {
+    res.send('Success');
 });
 
 app.post('/api/addSig', async (req, res) => {

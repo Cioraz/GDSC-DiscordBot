@@ -1,3 +1,4 @@
+# Description: This file contains all the functions that are used to validate the data that is being sent to the database
 import datetime
 
 # All validator functions
@@ -8,8 +9,8 @@ import datetime
 
 
 def isValidSigName(db_GDSC, sig_name):
-    sig_collection = db_GDSC["sig"]
-    x = sig_collection.find_one({"sig": sig_name})
+    sig_collection = db_GDSC["sigs"]
+    x = sig_collection.find_one({"sig_name": sig_name})
     if x == None:
         return 0  # Dint find such a SIG
     else:
@@ -63,20 +64,39 @@ def isExecutive(db_GDSC, discord_username):
 def findUserInfo(db_GDSC, discord_username):
     user_collection = db_GDSC["users"]
     x = user_collection.find_one({"discord_username": discord_username})
+    if (x['role'] == 'EM'):
+        role = 'Executive Member'
+    else:
+        role = 'Member'
     return f'''
-        Name: {x["username"]}\nRole: {x["role"]}\nEmail: {x["email"]}\nGithub: {x["github"]}\nSIG: {x["sig"]}\nYear: {x["year"]}\nBranch: {x["branch"]}\nPhone: {x["phone"]}\nDiscord Username: {x["discord_username"]}
+        Name: {x["username"]}\nRole: {role}\nEmail: {x["email"]}\nGithub: {x["github"]}\nSIG: {x["sig"]}\nYear: {x["year"]}\nBranch: {x["branch"]}\nPhone: {x["phone"]}\nDiscord Username: {x["discord_username"]}
     '''
 
 
+def findSIGMembers(db_GDSC, sig_name):
+    sig_collection = db_GDSC["users"]
+    x = sig_collection.find({"sig": sig_name})
+    if x == None:
+        return 0
+    else:
+        L = []
+        for i in x:
+            L.append(i["username"])
+        if (len(L) == 0):
+            return "No members in this SIG"
+        else:
+            return L
+
+
 def findSigInfo(db_GDSC, sig_name):
-    sig_collection = db_GDSC["sig"]
+    sig_collection = db_GDSC["sigs"]
     data = {
-        "sig": sig_name,
+        "sig_name": sig_name,
     }
     x = sig_collection.find_one(data)
     print(x)
     return f'''
-        SIG Name: {sig_name}\nSIG Head: {x["head"]}\nMembers: {x["members"]}
+        SIG Name: {sig_name}\nSIG Head: {x["sig_head"]}\nSIG Description: {x["sig_desc"]}\nSIG Members: {findSIGMembers(db_GDSC, sig_name)}
     '''
 
 

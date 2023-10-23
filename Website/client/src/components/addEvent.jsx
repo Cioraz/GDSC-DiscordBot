@@ -1,8 +1,10 @@
+// This file contains the form to add a new event to the database
 import React from 'react'
 import Leftside from '../pages/leftSide'
 import { useState } from 'react'
 import axios from 'axios'
 
+// This function contains the form to add a new event to the database
 const addEvent = () => {
     const initialValues = {
         event_date: '',
@@ -12,6 +14,7 @@ const addEvent = () => {
         event_name: '',
         event_description: '',
     }
+    // This function handles the changes in the form
     const [formValues, setFormValues] = useState(initialValues)
     const [formError, setFormErrors] = useState({})
     const handleChange = (e) => {
@@ -23,22 +26,34 @@ const addEvent = () => {
         })
 
     }
+
+    // This function handles the submission of the form
     const handleSubmit = async (e) => {
-        e.preventDefault()
-        setFormErrors(validate(formValues))
+        e.preventDefault();
+        const errors = validate(formValues);
+        setFormErrors(errors);
 
-        await axios.post("http://localhost:3000/api/addEvent", {
-            event_date: formValues.event_date,
-            event_time: formValues.event_time,
-            event_description: formValues.event_description,
-            event_venue: formValues.event_venue,
-            event_T: formValues.event_T,
-            event_name: formValues.event_name
+        if (Object.keys(errors).length === 0) {
+            // No errors, so you can submit the form
+            formValues.event_name = formValues.event_name.toUpperCase();
 
-        })
+            try {
+                await axios.post("http://localhost:3000/api/addEvent", {
+                    event_date: formValues.event_date,
+                    event_time: formValues.event_time,
+                    event_description: formValues.event_description,
+                    event_venue: formValues.event_venue,
+                    event_T: formValues.event_T,
+                    event_name: formValues.event_name,
+                });
 
-
-    }
+                // Optionally, you can reset the formValues here
+                setFormValues(initialValues);
+            } catch (error) {
+                // Handle the Axios error here, if needed
+            }
+        }
+    };
 
     const validate = (values) => {
         const errors = {}
@@ -51,9 +66,8 @@ const addEvent = () => {
         if (!values.event_venue) {
             errors.event_venue = "Event Venue is required!";
         }
-        // handle edge cases when date is before current date and time is before current time on current date
 
-
+        // This is to check if the date and time are valid
         if (!values.event_date || values.event_date < new Date().toISOString().split('T')[0]) {
             errors.event_date = "Event Date is required or incorrect!";
         }

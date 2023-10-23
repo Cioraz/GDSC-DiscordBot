@@ -13,10 +13,8 @@ function App() {
       <Route path="/addUser" element={<AddUser />} />
       <Route path="/addSig" element={<AddSig />} />
       <Route path="/success" element={<Success />} />
-
     </Routes>
   )
-
 }
 
 export default App
