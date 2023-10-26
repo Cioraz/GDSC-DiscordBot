@@ -21,17 +21,18 @@ Task ID: WebClub Discord ChatBot
 
 ### Website
 
-![image](https://github.com/Cioraz/GDSC-DiscordBot/assets/76161837/018714ac-fcc7-4065-b4ee-5871edee95e4)
+![image](https://github.com/Cioraz/GDSC-DiscordBot/assets/76161837/358e293a-bb94-40c6-96c5-652d029798fa)
+
 
 Similary for adding new Member and adding a new Event has been implemented. The website is responsive along with error validations. This ensures that it is very user friendly to do such tasks.
 
 ### Bot functionalities (A few)
 
-![image](https://github.com/Cioraz/GDSC-DiscordBot/assets/76161837/f8840df1-4dff-46c6-b474-4d00d8c5414c)
+![image](https://github.com/Cioraz/GDSC-DiscordBot/assets/76161837/4d6aed92-a912-4348-b2e0-7ad5865233ae)
 
-![image](https://github.com/Cioraz/GDSC-DiscordBot/assets/76161837/40ae3d1e-0535-404e-8d17-dbc00319e921)
+![image](https://github.com/Cioraz/GDSC-DiscordBot/assets/76161837/dae3d9d3-14cf-4968-a39d-e01709c48aed)
 
-![image](https://github.com/Cioraz/GDSC-DiscordBot/assets/76161837/eb48c642-54ae-4005-8e04-248c331fa098)
+![image](https://github.com/Cioraz/GDSC-DiscordBot/assets/76161837/cffad58c-daf6-4c10-82da-1eb6d0644730)
 
 There are other functionalities also but all cannot be listed here. Olease checkout the below link for a demo
 
