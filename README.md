@@ -1,5 +1,4 @@
 # GDSC-DiscordBot
-Task ID: WebClub Discord ChatBot
 
 # What it contains
 - A fully functional discord bot with a help command line and a adminHelp command line to give admin/normanl commands to users
