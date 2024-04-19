@@ -1,0 +1,35 @@
+services:
+  db:
+    image: mongo:latest
+    container_name: db
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js
+    
+  # app:
+  #   build: .
+  #   container_name: python-app
+  #   depends_on:
+  #     - db
+  #     - frontend
+  #     - backend
+
+  frontend:
+    build: ./Website/client
+    container_name: frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - db
+    
+  # backend:
+  #   build: ./Website/backend
+  #   container_name: backend
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     - db

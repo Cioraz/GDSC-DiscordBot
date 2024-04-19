@@ -22,7 +22,7 @@ async def send_message(message, user_message, db_GDSC):
 
 
 def run_bot(db_GDSC):
-    BOT_TOKEN = os.environ.get('BOT_TOKEN')
+    BOT_TOKEN = os.environ['BOT_TOKEN']
     intents = discord.Intents.default()
     intents.message_content = True
     client = discord.Client(intents=intents)
