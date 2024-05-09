@@ -1,18 +1,17 @@
 # GDSC-DiscordBot
 
-# What it contains
-- A fully functional discord bot with a help command line and a adminHelp command line to give admin/normanl commands to users
-- A smart bot which can distinguish between NEP members/Intruders from Executive Members
-- A fully connected MongoDB local server which can validate and check for all the data
-- All required commands as given by the recruitment task
-- A fully functional website to allow for adding a new user, adding a new SIG and adding a new Event.
+# Features
+- A fully functional discord bot with a help command line and a adminHelp command line to give admin/normal commands to users.
+- A smart bot which can distinguish between NEP members/Intruders from Executive Members by accessing the MongoDB database.
+- A fully connected MongoDB local server which can validate and check for all the data.
+- A fully functional website to allow for adding a new user, adding a new SIG and adding a new Event for ease of Admin.
 - The website plans to be hosted but due to certain bugs is currently not begin hosted.
 - Similarly I plan on using Mongo Atlas but due to certain issues currently using the local mongoDB database on system.
 
-# Stuff to update
-- Add NLP recognition ( Did install embedChain but as I ran out of credits for openAPI key wasnt able to implement it in this application )
-- Fix redirection upon submitting a form
-- Hosting the website along with moving the local MongoDB to mongo Atlas
+# Future Works
+- Add NLP recognition for commands.
+- Fix redirection upon submitting a form.
+- Hosting the website along with moving the local MongoDB to mongo Atlas.
 - Find some google form API to use instead of hosting my own full stack app to add new sig, events or users.
 
  
@@ -41,9 +40,9 @@ https://www.youtube.com/watch?v=Jc3dSOZuM08
 
 
 # Setup
-- git clone https://github.com/Cioraz/GDSC-DiscordBot
-- cd GDSC-DiscordBot
-- pip install discord.py pymongo
-- cd Website/client and npm install all dependencies
-- cd Website/backend and npm install all dependencies
-- Make a .env like the example .env
+- ```git clone https://github.com/Cioraz/GDSC-DiscordBot```
+- ```cd GDSC-DiscordBot```
+- ```pip install discord.py pymongo```
+- ```cd Website/client``` and ```npm install``` all dependencies.
+- ```cd Website/backend``` and ```npm install``` all dependencies.
+- Make a .env like the example .env with the discord bot token from discord developer tools.
