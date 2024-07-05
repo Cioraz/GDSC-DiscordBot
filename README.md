@@ -1,4 +1,4 @@
-# DiscordBot
+# SmartiBot
 
 # Features
 - A fully functional discord bot with a help command line and a adminHelp command line to give admin/normal commands to users.
